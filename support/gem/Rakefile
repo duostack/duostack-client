@@ -13,5 +13,5 @@ Jeweler::Tasks.new do |gem|
   gem.authors = "Todd Eichel"
   gem.require_paths = ['.'] # default is ["lib"] but we don't have that
   
-  gem.executables = ["duostack", ".duostack-console-expect"]
+  gem.executables = ["duostack", ".duostack-expect", ".duostack-console-expect"]
 end

@@ -1,13 +1,15 @@
 #!/usr/bin/env expect
 
 set client  [lindex $argv 0]
-set command [lindex $argv 1]
-set appname [lindex $argv 2]
+set type    [lindex $argv 1]
+set prompt  [lindex $argv 2]
+set command [lindex $argv 3]
+set appname [lindex $argv 4]
 
-spawn $client console --app $appname
-expect ">> "
+spawn $client console $type --app $appname
+expect $prompt
 send $command
 send "\n"
-expect ">> "
+expect $prompt
 send "exit\n"
 expect eof

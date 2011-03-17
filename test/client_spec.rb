@@ -187,9 +187,9 @@ describe "Duostack client" do
       
         it "should reflect stack change upon re-push" do
           `cd #{@app_path} && touch poke && git add poke && git commit -m "poke" && git push duostack master 2>&1`
-          result = expect_console("IO.popen('ruby -v') { |f| puts f.gets }", @app_name)
+          result = expect_console('app', '>> ', "IO.popen('ruby -v') { |f| puts f.gets }", @app_name)
           expected = <<-END.gsub(/^ {12}/, '').gsub("\r", '')
-            spawn #{$client_executable} console --app #{@app_name}#{' ' if windows?}
+            spawn #{$client_executable} console app --app #{@app_name}#{' ' if windows?}
             Connecting to Ruby console for #{@app_name}...
             >> IO.popen('ruby -v') { |f| puts f.gets }
             ruby 1.9.2p136 (2010-12-25 revision 30365) [x86_64-linux]
@@ -250,9 +250,9 @@ describe "Duostack client" do
         
         it "should see env vars in console" do
           run_command("restart --app #{@app_name}") # need to restart first
-          result = expect_console("ENV['env1']", @app_name)
+          result = expect_console('app', '>> ', "ENV['env1']", @app_name)
           expected = <<-END.gsub(/^ {12}/, '').gsub("\r", '')
-            spawn #{$client_executable} console --app #{@app_name}#{' ' if windows?}
+            spawn #{$client_executable} console app --app #{@app_name}#{' ' if windows?}
             Connecting to Ruby console for #{@app_name}...
             >> ENV['env1']
             => "var1"
@@ -424,12 +424,13 @@ describe "Duostack client" do
         # TODO: check account verification process (currently tests need to run with verified account)
       end
       
+      # TODO: extended console tests      
       
       describe "for Ruby apps" do
-        it "should start a console session" do
-          result = expect_console("puts 'console test'", @app_name)
+        it "should start an app console session" do
+          result = expect_console('app', '>> ', "puts 'console test'", @app_name)
           expected = <<-END.gsub(/^ {12}/, '').gsub("\r", '')
-            spawn #{$client_executable} console --app #{@app_name}#{' ' if windows?}
+            spawn #{$client_executable} console app --app #{@app_name}#{' ' if windows?}
             Connecting to Ruby console for #{@app_name}...
             >> puts 'console test'
             console test

@@ -1,7 +1,18 @@
 #!/usr/bin/env expect
-set appname [lindex $argv 0]
 
-spawn -noecho ssh cli-console@duostack.net 
-expect "Connecting to Ruby console for "
-send "$appname...\n"
-interact
+set timeout 3600
+
+set client  [lindex $argv 0]
+set type    [lindex $argv 1]
+set prompt  [lindex $argv 2]
+set command [lindex $argv 3]
+set appname [lindex $argv 4]
+
+spawn $client console $type --app $appname
+expect $prompt
+send "\r"
+send -- "[read [open $command r]]"
+send "\r"
+expect $prompt
+send "exit\r"
+expect eof

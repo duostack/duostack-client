@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+args_string = ARGV.collect { |a| "'#{a}'" }.join(' ')
+exec(File.join(File.dirname(__FILE__), 'bash', File.basename(__FILE__)) + ' ' + args_string)

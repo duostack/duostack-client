@@ -10,8 +10,8 @@ def run_command(command, app_path='.')
   `cd #{app_path} && #{build_command(command)} 2>&1`.chomp
 end
 
-def expect_console(command, app_name)
-  `expect #{File.dirname(__FILE__)}/console_test.expect #{$client_executable} "#{command}" #{app_name}`.gsub("\r", '')
+def expect_console(type, prompt, command, app_name)
+  `expect #{File.dirname(__FILE__)}/console_test.expect #{$client_executable} "#{type}" "#{prompt}" "#{command}" "#{app_name}"`.gsub("\r", '')
 end
 
 def expect_billing_confirmation(response, app_name)
