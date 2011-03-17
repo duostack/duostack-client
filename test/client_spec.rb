@@ -107,10 +107,6 @@ describe "Duostack client" do
       result = run_command("create #{@app_name.next} --remote staging", @app_path)
       result.should match("App created")
       result.should match("Git remote added")
-      
-      # add an env var so we can ID this app later
-      # TODO: use info command instead
-      run_command("env add name=#{@app_name.next} --app #{@app_name.next}")
     end
     
     
@@ -126,6 +122,14 @@ describe "Duostack client" do
         result = run_command("restart --app #{@app_name}")
         result.should match("App restarted")
         result.should_not match("Unable to restart app")
+      end
+      
+      it "should retrieve app info" do
+        result = run_command("info --app #{@app_name}")
+        result.should match('App Name')
+        result.should match(@app_name)
+        result.should match('Git')
+        result.should match('Stack')
       end
       
       it "should retrieve logs" do
@@ -159,8 +163,7 @@ describe "Duostack client" do
         end
         
         it "should allow using --remote to set alternate app" do
-          # TODO: replace with info command so this test isn't dependent on env working
-          run_command("env --remote staging", @app_path).should match(@app_name.next)
+          run_command("info --remote staging", @app_path).should match(@app_name.next)
         end
       end
       
