@@ -98,6 +98,12 @@ module Duostack
         :display_type => 'database',
         :display_name_suffix => ' (mongodb)',
         :prompt => '> '
+      },
+      :redis => {
+        :target => 'cli-dbconsole@duostack.net',
+        :display_type => 'database',
+        :display_name_suffix => ' (redis)',
+        :prompt => 'redis> '
       }
     }
     
@@ -1167,6 +1173,7 @@ module Duostack
               #{$client} console app       launches interactive app console (Ruby apps only)
               #{$client} console mysql     launches interactive MySQL database console
               #{$client} console mongodb   launches interactive MongoDB database console
+              #{$client} console redis     launches interactive Redis database console
               
               #{$client} console app "puts('hello world')"
               #{$client} console mysql "SHOW TABLES;"
@@ -1186,7 +1193,7 @@ module Duostack
             databases. If no argument is given, it connects to the app console itself
             (applicable only to Ruby apps). If a database name is given, connects to a
             database console session for that database. Valid database names are: mysql,
-            mongodb.
+            mongodb, redis.
             
             You can use then use these interactive console sessions to make any action you
             would normally make in your app or database console.
