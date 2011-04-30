@@ -28,7 +28,7 @@ $client = File.basename(__FILE__)
 module Duostack
   class Client
     
-    VERSION = '0.4.0'
+    VERSION = '0.5.0'
     DEPENDENCIES_LAST_MODIFIED = 1298683372
     USER_AGENT = "duostack-#{VERSION}"
     
