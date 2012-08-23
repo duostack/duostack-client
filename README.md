@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/duostack/duostack-client.png)](http://travis-ci.org/duostack/duostack-client)
 Duostack Command Line Client
 ============================
 
